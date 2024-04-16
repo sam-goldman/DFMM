@@ -7,6 +7,9 @@ optimized-out
 kit/target
 target
 
+# Node
+node_modules/
+
 .env
 report/main.aux
 report/main.pyg

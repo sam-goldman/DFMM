@@ -5,12 +5,10 @@ import "forge-std/Script.sol";
 import "src/DFMM.sol";
 import "solmate/tokens/WETH.sol";
 import "solmate/test/utils/mocks/MockERC20.sol";
+import "@sphinx-labs/contracts/SphinxPlugin.sol";
 
-contract DeploymentScript is Script {
-    function run() public {
-        uint256 deployerPrivateKey = vm.envUint("DEPLOYMENT_PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-
+contract DeploymentScript is Script, Sphinx {
+    function run() public sphinx {
         WETH weth = new WETH();
         DFMM dfmm = new DFMM(address(weth));
         // GeometricMean g3m = new GeometricMean(address(dfmm));
@@ -29,7 +27,12 @@ contract DeploymentScript is Script {
         console.log("USDT:", address(usdt));
         console.log("DAI:", address(dai));
         console.log("WBTC:", address(wbtc));
+    }
 
-        vm.stopBroadcast();
+    function configureSphinx() public override {
+        sphinxConfig.owners = [YOUR_EOA];
+        sphinxConfig.orgId = YOUR_ORG_ID;
+        sphinxConfig.projectName = "DFMM";
+        sphinxConfig.threshold = 1;
     }
 }

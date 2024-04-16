@@ -2,8 +2,11 @@
 remappings = [
   "solmate/=lib/solstat/lib/solmate/src/",
   "solstat/=lib/solstat/src/",
+  "@sphinx-labs/contracts/=lib/sphinx/packages/contracts/contracts/foundry"
 ]
 solc_version = "0.8.22"
+extra_output = ['storageLayout']
+fs_permissions = [{ access = "read-write", path = "./cache"}]
 
 # these are defaults. explicitly setting them here for clarity.
 libs = ["lib"]
